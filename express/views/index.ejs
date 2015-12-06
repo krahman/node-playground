@@ -2,8 +2,24 @@
 	<head>
 		<title>Hello World</title>
 		<link href="/assets/style.css" type="text/css" rel="stylesheet" />
+		<script src="/lib/jquery/dist/jquery.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$.ajax({
+				url: '/person',
+				method: 'POST',
+				dataType: 'json/application',
+				data: {firstName: 'Khalilur', lastName: 'Rahman'}
+			});
+		</script>
 	</head>
 	<body>
 		<h1>Hello World!</h1>
+		<form action="/person" method="POST">
+			First Name : <input type="text" id="firstName" name="firstName" />
+			<br />
+			Last Name : <input type="text" id="lastName" name="lastName" />
+			<br />
+			<input type="submit" value="Submit" />
+		</form>
 	</body>
 </html>

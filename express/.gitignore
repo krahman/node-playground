@@ -1,0 +1,5 @@
+# skip node packages folder
+node_modules
+
+# skip bower folder
+bower_components
