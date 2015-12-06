@@ -1,9 +1,8 @@
 var express = require('express');
 var app = express();
 
-var bodyParser = require('body-parser');
-var urlencodedParser = bodyParser.urlencoded({extended: false});
-var jsonPrser = bodyParser.json();
+var apiController = require('./controllers/apiController');
+var htmlController = require('./controllers/htmlController');
 
 app.set('view engine', 'ejs');
 
@@ -15,26 +14,7 @@ app.use('/', function(req, res, next) {
 	next();
 });
 
-app.get('/', function(req, res) {
-	res.render('index');
-});
-
-app.get('/person', function(req, res) {
-	res.json({firstName: 'John', lastName: 'Doe'});
-});
-
-app.post('/person', urlencodedParser, function(req, res) {
-	console.log({firstName: req.body.firstName, lastName: req.body.lastName});
-
-	res.send('Thank you : ' + req.body.firstName);
-});
-
-app.post('/personjson', jsonPrser, function(req, res) {
-	console.log({firstName: req.body.firstName, lastName: req.body.lastName});
-});
-
-app.get('/person/:id', function(req, res) {
-	res.render('person', {id: req.params.id});
-});
+htmlController(app);
+apiController(app);
 
 app.listen(3000);
