@@ -3,3 +3,6 @@ node_modules
 
 # skip bower folder
 bower_components
+
+# skip config folder
+config
