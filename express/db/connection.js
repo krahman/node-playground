@@ -11,5 +11,15 @@ module.exports = function(config) {
 		database : dbConfig.database
 	});
 
+	connection.connect(function(err) {
+		if (err) {
+			console.error('Error connecting : ' + err.stack);
+			connection.end();
+			return;
+		}
+
+		console.log('Connected as id : ' + connection.threadId);
+	});
+	
 	return connection;
 };
