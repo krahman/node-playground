@@ -10,9 +10,13 @@ var morgan = require('morgan');
 
 var apiController = require('./controllers/apiController');
 var htmlController = require('./controllers/htmlController');
+var userController = require('./controllers/userController');
 
 var config = require('config');
-var connection = require('./db/connection')(config);
+var mysqlConn = require('./db/mysql')(config);
+var mongoose = require('./db/mongo')(config);
+
+var User = require('./models/user')(mongoose);
 
 app.set('view engine', 'ejs');
 
@@ -37,5 +41,6 @@ app.use('/', function(req, res, next) {
 
 htmlController(app);
 apiController(app);
+userController(app, User);
 
 app.listen(port);
